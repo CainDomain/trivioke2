@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class Trivia extends Component {
   state = {
-    data: [],
+    questions: [],
   };
 
   // Code is invoked after the component is mounted/inserted into the DOM tree.
@@ -11,31 +11,33 @@ class Trivia extends Component {
 
     fetch(url)
       .then(result => result.json())
-      .then((result) => {
+      .then((data) => {
         this.setState({
-          data: result.results,
+          questions: data.results,
         });
-        console.log(result.results);
-      });
+        console.log(data.results);
+      })
+      .catch((err) => { console.error(err); });
   }
 
   render() {
-    const { data } = this.state;
-
-    const result = data.map((entry) => {
+    const { questions } = this.state;
+    const questArray = [];
+    questions.forEach((entry) => {
       // console.log(entry);
       const multiChoice = [
         <li key={entry.category}>{entry.question}</li>,
-        <li key={entry.category}>{entry.correct_answer}</li>,
-        <li key={entry.category}>{entry.incorrect_answers[0]}</li>,
-        <li key={entry.category}>{entry.incorrect_answers[1]}</li>,
-        <li key={entry.category}>{entry.incorrect_answers[2]}</li>,
-
+        <div key="answers">
+          <button type="button">{entry.correct_answer}</button>
+          <button type="button">{entry.incorrect_answers[0]}</button>
+          <button type="button">{entry.incorrect_answers[1]}</button>
+          <button type="button">{entry.incorrect_answers[2]}</button>
+        </div>,
       ];
-      return multiChoice;
+      questArray.push(multiChoice);
     });
 
-    return <ul>{result}</ul>;
+    return <ul>{questArray[0]}</ul>;
   }
 }
 

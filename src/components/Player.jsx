@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-import { Player } from 'video-react';
+// import { Player } from 'video-react';
+import Iframe from 'react-iframe';
 
 class VideoPlayer extends React.Component {
   constructor(props) {
@@ -30,22 +31,32 @@ class VideoPlayer extends React.Component {
   }
 
   changeVideo() {
+    const { videos } = this.state;
     const rand = Math.floor(Math.random() * 43) + 1;
     this.setState({
-      video: this.state.videos[rand],
+      video: videos[rand],
     });
   }
 
   //
   render() {
+    const { video } = this.state;
     return (
       <div>
-        <Player playsInline>
-          <iframe fluid="true" className="embed-responsive-item" src={`https://www.youtube.com/embed/${this.state.video.uri}`} allowFullScreen />
-        </Player>
-        <button onClick={this.changeVideo}>
+        {/* <Player> */}
+        <button type="button" onClick={this.changeVideo}>
           Activate Lasers
         </button>
+        <Iframe
+          url={`https://www.youtube.com/embed/${video.uri}`}
+          playsInline
+          fluid="true"
+          width="500px"
+          height="500px"
+          className="embed-responsive-item"
+          allowFullScreen
+        />
+        {/* </Player> */}
       </div>
     );
   }
