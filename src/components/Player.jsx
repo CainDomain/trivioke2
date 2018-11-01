@@ -17,7 +17,7 @@ class VideoPlayer extends React.Component {
   }
 
   componentDidMount() {
-    axios({ method: 'GET', url: '/songs', headers: { 'Access-Control-Allow-Origin': '*' } })
+    axios({ method: 'GET', url: 'http://127.0.0.1:8080/songs', headers: { 'Access-Control-Allow-Origin': '*' } })
       .then((res) => {
         this.setState({
           video: res.data[3],
@@ -45,7 +45,7 @@ class VideoPlayer extends React.Component {
       <div>
         {/* <Player> */}
         <button type="button" onClick={this.changeVideo}>
-          Activate Lasers
+          Change Song
         </button>
         <Iframe
           url={`https://www.youtube.com/embed/${video.uri}`}

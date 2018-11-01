@@ -7,7 +7,7 @@ class Trivia extends Component {
 
   // Code is invoked after the component is mounted/inserted into the DOM tree.
   componentDidMount() {
-    const url = 'https://opentdb.com/api.php?amount=2&category=9&difficulty=medium&type=multiple';
+    const url = 'https://opentdb.com/api.php?amount=50&category=9&difficulty=medium&type=multiple';
 
     fetch(url)
       .then(result => result.json())
@@ -23,21 +23,35 @@ class Trivia extends Component {
   render() {
     const { questions } = this.state;
     const questArray = [];
+    let currQuest = 0;
+    function escapeHtml(text) {
+      return text
+        .replace(/&amp;/g, '&')
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+        .replace(/&quot;/g, '"')
+        .replace(/&#039;/g, "'")
+        .replace(/&ldquo;/g, '"')
+        .replace(/&rsquo;/g, "'");
+    }
+    function changeQuestion() {
+      currQuest += 1;
+      return <ul>{questArray[currQuest]}</ul>;
+    }
     questions.forEach((entry) => {
-      // console.log(entry);
       const multiChoice = [
-        <li key={entry.category}>{entry.question}</li>,
+        <li key={entry.category}>{escapeHtml(entry.question)}</li>,
         <div key="answers">
-          <button type="button">{entry.correct_answer}</button>
-          <button type="button">{entry.incorrect_answers[0]}</button>
-          <button type="button">{entry.incorrect_answers[1]}</button>
-          <button type="button">{entry.incorrect_answers[2]}</button>
+          <button type="button" onClick={() => { changeQuestion(); }}>{escapeHtml(entry.correct_answer)}</button>
+          <button type="button">{escapeHtml(entry.incorrect_answers[0])}</button>
+          <button type="button">{escapeHtml(entry.incorrect_answers[1])}</button>
+          <button type="button">{escapeHtml(entry.incorrect_answers[2])}</button>
         </div>,
       ];
       questArray.push(multiChoice);
     });
 
-    return <ul>{questArray[0]}</ul>;
+    return <ul>{questArray[currQuest]}</ul>;
   }
 }
 
