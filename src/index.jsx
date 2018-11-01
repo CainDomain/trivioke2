@@ -8,7 +8,7 @@ import './index.css';
 
 const Index = () => (
   <div>
-      Welcome to Trivioke!
+    Welcome to Trivioke!
     <Signup />
     <Login />
     <Trivia />
