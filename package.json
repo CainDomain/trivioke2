@@ -1,11 +1,13 @@
 {
-  "name": "react-tutorial",
+  "name": "trivioke",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
-    "react-scripts": "2.1.0"
+    "react-scripts": "2.1.0",
+    "redux": "^4.0.1",
+    "video-react": "^0.13.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -21,5 +23,12 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "eslint": "^5.8.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.2",
+    "eslint-plugin-react": "^7.11.1"
+  }
 }

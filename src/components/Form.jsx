@@ -6,17 +6,17 @@ class Form extends Component {
 
     this.initialState = {
       name: '',
-      job: ''
+      job: '',
     };
 
     this.state = this.initialState;
   }
 
-  handleChange = event => {
+  handleChange = (event) => {
     const { name, value } = event.target;
 
     this.setState({
-      [name]: value
+      [name]: value,
     });
   }
 
@@ -35,17 +35,20 @@ class Form extends Component {
           type="text"
           name="name"
           value={name}
-          onChange={this.handleChange} />
+          onChange={this.handleChange}
+        />
         <label>Job</label>
         <input
           type="text"
           name="job"
           value={job}
-          onChange={this.handleChange} />
+          onChange={this.handleChange}
+        />
         <input
           type="button"
           value="Submit"
-          onClick={this.submitForm} />
+          onClick={this.submitForm}
+        />
       </form>
     );
   }
